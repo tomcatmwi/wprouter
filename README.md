@@ -1,10 +1,10 @@
 # `wprouter` - A simple C++ Websocket router for Linux
 
-This lightweight Websockets router facilitates Websocket communication between IoT devices, in a star network architecture, with the physical network router in the center. In other words, if you have multiple IoT devices to talk to each other, this router may be the solution to organize data traffic. I wrote this program for a **GL.iNet GL-MT300N-V2** pocket router (an awesome piece of hardware), but it should work on basically anything, including microcontrollers.
+This lightweight Websocket router facilitates Websocket communication between IoT devices, in a star network architecture, with the physical network router in the center. In other words, if you have multiple IoT devices to talk to each other, this router may be the solution to organize data traffic. I wrote this program for a **GL.iNet GL-MT300N-V2** pocket router (an awesome piece of hardware), but it should work on basically anything, including microcontrollers.
 
 ## How to build it
 
-You will need `websocketpp`, `asio` and the appropriate C++ build tool for your target platform. The `build.sh` script is there for your convenience, with some instructions on what to download and where to find them. A binary build is also included, for the `mipsel` architecture.
+You will need `websocketpp`, `asio` and the appropriate C++ build tool for your target platform. The `build.sh` script is there for your convenience, with some instructions on what to download and where to find them. A binary build is also included for the most common `mipsel` architecture.
 
 ## How to use it
 
@@ -144,15 +144,21 @@ Run the program with `--log` or `-l` command line argument to see message traffi
 |`[ERROR]`|Error message sent|
 |`[SYSTEM]`|System message sent|
 
+If you're running `wprouter` as a service, you can monitor its log output with:
+
+```
+logread | grep wprouter
+```
+
 ##  Command line arguments
 
 |Argument|Shorthand|Meaning|Default value|
 |---|---|---|---|
-|--port|-p|Port number|8080|
-|--connections|-c|Maximum number of Websocket clients|10|
-|--log|-l|Console logging on||
-|--version|-v|Show version number||
-|--help|-h|This help||
+|`--port`|`-p`|Port number|8080|
+|`--connections`|`-c`|Maximum number of Websocket clients|10|
+|`--log`|`-l`|Console logging on||
+|`--version`|`-v`|Show version number||
+|`--help`|`-h`|This help||
 
 # Installing as a Linux service
 
@@ -190,18 +196,6 @@ ln -s /etc/init.d/wprouter etc/rc.d/S99wprouter
 ```
 
 (Be mindful of the relative paths, don't add `/` before the symlink path! That would create a symlink in your own system.)
-
-While running `wprouter` as a service, you can monitor its log output with:
-
-```
-logread | grep wprouter
-```
-
-or
-
-```
-logread | grep wprouter | tail
-```
 
 # Integrating `wprouter` into your firmware
 

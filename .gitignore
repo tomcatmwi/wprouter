@@ -2,4 +2,5 @@ asio/
 websocketpp/
 mipsel-*/
 firmware/
+*/
 *.tar.gz

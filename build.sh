@@ -6,14 +6,14 @@
 # asio:
 # https://think-async.com/Asio/Download.html
 #
-# mipsel c++ build:
+# mipsel c++ build (if you're building for mipsel):
 # https://musl.cc/mipsel-linux-muslsf-cross.tgz
 
 
-# Most embedded Linux devices would need this build, adjust accordingly
-MIPSEL_PATH="./mipsel-linux-muslsf-cross/bin/mipsel-linux-muslsf-g++"
+# Most embedded Linux (OpenWrt) devices would need this compiler, but adjust accordingly
+COMPILER_PATH="./mipsel-linux-muslsf-cross/bin/mipsel-linux-muslsf-g++"
 APP_NAME="wprouter"
 
 clear
-$MIPSEL_PATH -static -I./websocketpp -I./asio/include -std=c++17 -o $APP_NAME ./main.cpp
+$COMPILER_PATH -static -I./websocketpp -I./asio/include -std=c++17 -o $APP_NAME ./main.cpp
 strip $APP_NAME

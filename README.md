@@ -1,6 +1,6 @@
 # `wprouter` - A simple C++ Websocket router for Linux
 
-This lightweight Websocket router facilitates Websocket communication between IoT devices, in a star network architecture, with the physical network router in the center. In other words, if you have multiple IoT devices to talk to each other, this router may be the solution to organize data traffic. I wrote this program for a **GL.iNet GL-MT300N-V2** pocket router (an awesome piece of hardware), but it should work on basically anything, including microcontrollers.
+This lightweight Websocket router facilitates Websocket communication between IoT devices, in a star network architecture, with the physical network router in the center. In other words, if you have multiple IoT devices to talk to each other, this router may be the solution to organize data traffic. I wrote this program for a **GL.iNet GL-MT300N-V2** pocket router (an awesome piece of hardware), which runs OpenWrt, but it should work on basically anything, including microcontrollers.
 
 ## How to build it
 
@@ -56,11 +56,16 @@ router::whisper::hello::whisper::
 
 Valid commands and their parameters (in brackets) are the following:
 
-### `hello`
+### `hello::<client_id>`
 - Identifies the client after connection. The first parameter is the id of the client, which is redundancy, just get over it
-- A client cannot receive any messages before "introducing itself". 
+- A client cannot receive any messages before "introducing itself".
 - However, it can already send messages. The router will automatically register it, so `hello` is somewhat optional.
 - Unconfirmed connections will stay connected and reserve a connection slot, so be sure to either introduce or disconnect them.
+- The router will respond with:
+
+```
+router::0::::hello <client id>
+```
 
 ### `ping`
 A ping. The router responds to the sender with a system message:
@@ -98,7 +103,7 @@ router::0::::3,0
 ```
 
 ### `version`
-Returns the build date and version of the router.
+Returns the version number and build date of the router.
 
 ## Errors
 
